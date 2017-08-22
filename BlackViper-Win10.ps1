@@ -60,13 +60,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     Files: This script and 'BlackViper.csv' (Service Configurations)
 
 .DESCRIPTION
- Script that can set services based on Black Viper's Service Configurations. 
+ Script that can set services based on Black Viper's Service Configurations.
 
- AT YOUR OWN RISK YOU CAN 
-  1. Run the script on x32 w/o changing settings (But shows a warning) 
-  2. Skip the check for 
-      A. Home/Pro ($Script:EditionCheck variable bottom of script or use -sec switch) 
-      B. Creator's Update ($Script:BuildCheck variable bottom of script or use -sbc switch) 
+ AT YOUR OWN RISK YOU CAN
+  1. Run the script on x32 w/o changing settings (But shows a warning)
+  2. Skip the check for
+      A. Home/Pro ($Script:EditionCheck variable bottom of script or use -sec switch)
+      B. Creator's Update ($Script:BuildCheck variable bottom of script or use -sbc switch)
 
 .BASIC USAGE
   Run script with powershell.exe -NoProfile -ExecutionPolicy Bypass -File BlackViper-Win10.ps1
@@ -103,7 +103,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --Log Switches--
   -log           (Makes a log file Script.log)
   -baf           (Log File of Services Configuration Before and After the script)
-  
+
 --AT YOUR OWN RISK Switches--
   -sec           (Skips Edition Check by Setting Edition as Pro)
   -secp           ^Same as Above
@@ -254,7 +254,7 @@ Function DiagnosticCheck([int]$Bypass) {
         DisplayOutMenu " PC Type = $PCType" 15 0 1 1
         DisplayOutMenu " Desktop/Laptop = $IsLaptop" 15 0 1 1
         DisplayOutMenu " ServiceConfig = $Black_Viper" 15 0 1 1
-        DisplayOutMenu " All/Min = $All_or_Min" 15 0 1 1        
+        DisplayOutMenu " All/Min = $All_or_Min" 15 0 1 1
         DisplayOutMenu " ToS = $AcceptToS" 15 0 1 1
         DisplayOutMenu " Automated = $Automated" 15 0 1 1
         DisplayOutMenu " ScriptVerCheck = $ScriptVerCheck" 15 0 1 1
@@ -402,7 +402,7 @@ Function Gui-Start {
     <ComboBoxItem Content="Custom Setting *" HorizontalAlignment="Left" Width="116"/>
    </ComboBox>
    <RadioButton Name="RadioAll" Content="All -Change All Services" HorizontalAlignment="Left" Margin="5,26,0,0" VerticalAlignment="Top" IsChecked="True"/>
-   <RadioButton Name="RadioMin" Content="Min -Change Services that are Differant from Default to Safe/Tweaked" HorizontalAlignment="Left" Margin="5,41,0,0" VerticalAlignment="Top"/>
+   <RadioButton Name="RadioMin" Content="Min -Change Services that are Different from Default to Safe/Tweaked" HorizontalAlignment="Left" Margin="5,41,0,0" VerticalAlignment="Top"/>
    <Label Content="Black Viper Configuration Options (BV Services Only)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,3,0,0" FontWeight="Bold"/>
    <Label Name="CustomNote1" Content="*Note: Configure Bellow" HorizontalAlignment="Left" Margin="262,63,0,0" VerticalAlignment="Top" Width="148" Height="27" FontWeight="Bold"/>
    <Rectangle Fill="#FFFFFFFF" Height="1" Margin="0,97,-6,0" Stroke="Black" VerticalAlignment="Top"/>
@@ -631,7 +631,7 @@ Function RunDisableCheck {
         $WPF_RunScriptButton.IsEnabled = $True
         If($WPF_ServiceConfig.SelectedIndex + 1 -eq $BVCount) {
             $Script:ServiceConfigFile = $WPF_LoadFileTxtBox.Text
-            If(!($ServiceConfigFile) -or !(Test-Path $ServiceConfigFile -PathType Leaf)) { 
+            If(!($ServiceConfigFile) -or !(Test-Path $ServiceConfigFile -PathType Leaf)) {
                 $WPF_RunScriptButton.IsEnabled = $False
                 $Buttontxt = "Run Disabled, No Custom Service Selected or Doesn't exist."
                 $WPF_LoadServicesButton.IsEnabled = $False
@@ -800,7 +800,7 @@ Function Save_Service([String]$SavePath) {
             }
         }
     } Else {
-        If($AllService -eq $null) { 
+        If($AllService -eq $null) {
             $ServiceSavePath += "-Service-Backup.csv"
             $AllService = Get-Service | Select Name, StartType
         } Else {
@@ -964,7 +964,7 @@ Function ScriptUpdateFun {
     If($ScriptLog -eq 1){ $UpArg += "-logc $LogName " }
     If($All_or_Min -eq "-full"){ $UpArg += "-all " } Else{ $UpArg += "-min " }
     If($LoadServiceConfig -eq 1){ $UpArg += "-lcsc $ServiceConfigFile " }
-    If($LoadServiceConfig -eq 2){ $TempSrv = $env:Temp + "\TempSrv.csv" ;$Script:csv | Export-Csv -LiteralPath $TempSrv -encoding "unicode" -force -Delimiter "," ;$UpArg += "-lcsc $TempSrv " } 
+    If($LoadServiceConfig -eq 2){ $TempSrv = $env:Temp + "\TempSrv.csv" ;$Script:csv | Export-Csv -LiteralPath $TempSrv -encoding "unicode" -force -Delimiter "," ;$UpArg += "-lcsc $TempSrv " }
     If($BackupServiceConfig -eq 1){ $UpArg += "-bcsc " }
     If($ShowNonInstalled -eq 1){ $UpArg += "-snis " }
     Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$WebScriptFilePath`" $UpArg" -Verb RunAs
@@ -1113,7 +1113,7 @@ Function PreScriptCheck {
         }
     }
 
-    If($LoadServiceConfig -ne 2) { 
+    If($LoadServiceConfig -ne 2) {
         If(!(Test-Path $ServiceFilePath -PathType Leaf)) {
             $Script:ErrorDi = "Missing File BlackViper.csv"
             Error_Top_Display
@@ -1294,7 +1294,7 @@ $Script:Diagnostic = 0          #0 = Doesn't show Shows diagnostic information
                                 #1 = Shows diagnostic information
 
 $Script:DevLog = 0              #0 = Doesn't make a Dev Log
-                                #1 = Makes a log files.. with what services change, before and after for services, and diagnostic info 
+                                #1 = Makes a log files.. with what services change, before and after for services, and diagnostic info
 #--------------------------------------------------------------------------
 # Starts the script (Do not change)
 
